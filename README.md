@@ -1,5 +1,5 @@
-Simple Pinyin Translator
-========================
+Pinyin Translator
+=================
 
 A simple python script to translate chinese to pinyin based on Mandarin.dat
 
