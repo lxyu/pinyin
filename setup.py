@@ -11,7 +11,7 @@ setup(
     author_email='lixinfish@gmail.com',
     packages=['pinyin', ],
     package_data={'': ['LICENSE'], 'pinyin': ['Mandarin.dat'], },
-    url='https://github.com/lxyu/pinyin',
+    url='http://lxyu.github.com/pinyin',
     license=open('LICENSE').read(),
     long_description=open('README.rst').read(),
 )
