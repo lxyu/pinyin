@@ -1,17 +1,22 @@
-Pinyin Translator
-=================
+Pinyin
+======
 
 Translate chinese chars to pinyin based on Mandarin.dat
+
+Install
+-------
+
+.. code:: bash
+
+    $ pip install pinyin
 
 Usage
 -----
 
-Input unicode string
-
-::
+.. code:: python
 
     >>> import pinyin
-    >>> pinyin.get_pinyin(u'你好')
+    >>> pinyin.get(u'你好')
     'nihao'
     >>> pinyin.get_initial(u'你好')
     'n h'

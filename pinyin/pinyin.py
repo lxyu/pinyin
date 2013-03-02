@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 __all__ = ['get_pinyin', 'get_initial']
@@ -14,7 +13,7 @@ with open(dat) as f:
         pinyin_dict[k] = v.lower().split(" ")[0][:-1]
 
 
-def pinyin_generator(chars):
+def _pinyin_generator(chars):
     """
     Generate pinyin for chars, if char is not chinese character,
     itself will be returned.
@@ -25,21 +24,21 @@ def pinyin_generator(chars):
         yield pinyin_dict.get(key, char)
 
 
-def get_pinyin(s):
+def get(s):
+    """Return pinyin of string, the string must be unicode
     """
-    Return pinyin of string, the input string must be unicode
-    """
-    assert(type(s) is unicode)
+    assert(isinstance(s, unicode))
+    return ''.join(_pinyin_generator(s))
 
-    generator = pinyin_generator(s)
-    return ''.join(generator)
+
+def get_pinyin(s):
+    """This function is only for backward compatibility, use `get` instead.
+    """
+    return get(s)
 
 
 def get_initial(s):
+    """Return the 1st char of pinyin of string, the string must be unicode
     """
-    Return the 1st char of pinyin of string, the input string must be unicode
-    """
-    assert(type(s) is unicode)
-
-    generator = pinyin_generator(s)
-    return ' '.join([p[0] for p in generator])
+    assert(isinstance(s, unicode))
+    return ' '.join([p[0] for p in _pinyin_generator(s)])
