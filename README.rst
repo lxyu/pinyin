@@ -1,6 +1,8 @@
 Pinyin
 ======
 
+.. image:: https://travis-ci.org/lxyu/pinyin.png?branch=master
+
 Translate chinese chars to pinyin based on Mandarin.dat
 
 Install
