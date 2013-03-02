@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-__all__ = ['get_pinyin', 'get_initial']
+__all__ = ['get', 'get_pinyin', 'get_initial']
 
 import os
 
 # init pinyin dict
-dat = os.path.join(os.path.dirname(__file__), "Mandarin.dat")
 pinyin_dict = {}
+dat = os.path.join(os.path.dirname(__file__), "Mandarin.dat")
 with open(dat) as f:
     for line in f:
         k, v = line.strip().split('\t')
