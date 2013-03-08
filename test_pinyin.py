@@ -40,7 +40,7 @@ class BasicTestSuite(unittest.TestCase):
         self.assertEqual(pinyin.get(u'hi你好'), 'hinihao')
 
     def test_unicode_assertion(self):
-        self.failUnlessRaises(AssertionError, pinyin.get_pinyin, '你好')
+        self.failUnlessRaises(AssertionError, pinyin.get, '你好')
 
 
 if __name__ == '__main__':

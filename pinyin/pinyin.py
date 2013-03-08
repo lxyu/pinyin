@@ -31,8 +31,12 @@ def get(s, delimiter=''):
     return delimiter.join(_pinyin_generator(s))
 
 
-# This function is only for backward compatibility, use `get` instead.
-get_pinyin=get
+def get_pinyin(s):
+    """This function is only for backward compatibility, use `get` instead.
+    """
+    import warnings
+    warnings.warn('Deprecated, use `get` instead.')
+    return get(s)
 
 
 def get_initial(s, delimiter=' '):
