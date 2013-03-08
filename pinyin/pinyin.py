@@ -3,7 +3,9 @@
 __all__ = ['get', 'get_pinyin', 'get_initial']
 
 import os
+import re
 
+_punct_re = re.compile(ur'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.？]+')
 # init pinyin dict
 pinyin_dict = {}
 dat = os.path.join(os.path.dirname(__file__), "Mandarin.dat")
@@ -21,24 +23,42 @@ def _pinyin_generator(chars):
     """
     for char in chars:
         key = "%X" % ord(char)
-        yield pinyin_dict.get(key, char)
+        yield pinyin_dict.get(key, char), char
 
 
-def get(s):
+def get(s, delimiter=u''):
     """Return pinyin of string, the string must be unicode
     """
     assert(isinstance(s, unicode))
-    return ''.join(_pinyin_generator(s))
+    words = []
+    one_word = u""
+    for word in _punct_re.split(s.lower()):
+        for pinyin, char in _pinyin_generator(word):
+            if pinyin != char:
+                if one_word:
+                    words.append(one_word)
+                    one_word = u""
+                words.append(pinyin)
+            else:
+                one_word += char
+
+        if one_word:
+            words.append(one_word)
+            one_word = u""
+
+    return unicode(delimiter.join(words))
 
 
-def get_pinyin(s):
-    """This function is only for backward compatibility, use `get` instead.
-    """
-    return get(s)
+# This function is only for backward compatibility, use `get` instead.
+get_pinyin=get
 
 
-def get_initial(s):
+def get_initial(s, delimiter=u' '):
     """Return the 1st char of pinyin of string, the string must be unicode
     """
     assert(isinstance(s, unicode))
-    return ' '.join([p[0] for p in _pinyin_generator(s)])
+    words = []
+    for word in _punct_re.split(s.lower()):
+        for pinyin, char in _pinyin_generator(word):
+            words.append(pinyin[0])
+    return unicode(delimiter.join(words))
