@@ -24,21 +24,19 @@ def _pinyin_generator(chars):
         yield pinyin_dict.get(key, char)
 
 
-def get(s):
+def get(s, delimiter=''):
     """Return pinyin of string, the string must be unicode
     """
     assert(isinstance(s, unicode))
-    return ''.join(_pinyin_generator(s))
+    return delimiter.join(_pinyin_generator(s))
 
 
-def get_pinyin(s):
-    """This function is only for backward compatibility, use `get` instead.
-    """
-    return get(s)
+# This function is only for backward compatibility, use `get` instead.
+get_pinyin=get
 
 
-def get_initial(s):
+def get_initial(s, delimiter=' '):
     """Return the 1st char of pinyin of string, the string must be unicode
     """
     assert(isinstance(s, unicode))
-    return ' '.join([p[0] for p in _pinyin_generator(s)])
+    return delimiter.join([p[0] for p in _pinyin_generator(s)])
