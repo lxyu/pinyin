@@ -15,6 +15,16 @@ class BasicTestSuite(unittest.TestCase):
 
         self.assertEqual(pinyin.get('你好'.decode('utf-8')), u'nihao')
 
+    def test_get_with_delimiter(self):
+        self.assertEqual(pinyin.get(u'你好', " "), 'ni hao')
+        self.assertEqual(pinyin.get(u'你好吗?', " "), 'ni hao ma ?')
+        self.assertEqual(pinyin.get(u'你好吗？', " "), u'ni hao ma \uff1f')
+
+    def test_get_initial_with_delimiter(self):
+        self.assertEqual(pinyin.get_initial(u'你好', "-"), 'n-h')
+        self.assertEqual(pinyin.get_initial(u'你好吗?', "-"), 'n-h-m-?')
+        self.assertEqual(pinyin.get_initial(u'你好吗？', "-"), u'n-h-m-？')
+
     def test_get_initial(self):
         self.assertEqual(
             pinyin.get_initial(u'你好'), 'n h')
