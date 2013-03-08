@@ -39,7 +39,9 @@ def get(s, delimiter=''):
                     result.append(one_word)
                     one_word = u""
                 result.append(pinyin)
+                print 2
             else:
+                print 1
                 one_word += char
 
         if one_word:
