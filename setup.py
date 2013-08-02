@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from distutils.core import setup
 
 setup(
@@ -11,7 +8,7 @@ setup(
     author_email='lixinfish@gmail.com',
     packages=['pinyin', ],
     package_data={'': ['LICENSE'], 'pinyin': ['Mandarin.dat'], },
-    scripts=['bin/pinyin'],
+    entry_points={"console_scripts": ["pinyin = pinyin.cmd:pinyin", ]},
     url='http://lxyu.github.com/pinyin/',
     license=open('LICENSE').read(),
     long_description=open('README.rst').read(),
