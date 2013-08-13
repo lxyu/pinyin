@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='pinyin',
-    version='0.2.0',
+    version='0.2.1',
     description='Translate chinese chars to pinyin based on Mandarin.dat',
     author='Lx Yu',
     author_email='lixinfish@gmail.com',

@@ -15,6 +15,7 @@ class BasicTestSuite(unittest.TestCase):
         self.assertEqual(pinyin.get('你好吗？'), u('nihaoma？'))
 
         self.assertEqual(pinyin.get('你好'), 'nihao')
+        self.assertEqual(pinyin.get('叶'), 'ye')
 
     def test_get_with_delimiter(self):
         self.assertEqual(pinyin.get('你好', " "), 'ni hao')
