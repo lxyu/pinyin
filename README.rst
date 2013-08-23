@@ -1,7 +1,14 @@
 Pinyin
 ======
 
+.. image:: https://badge.fury.io/py/pinyin.png
+    :target: http://badge.fury.io/py/pinyin
+
 .. image:: https://travis-ci.org/lxyu/pinyin.png?branch=master
+    :target: https://travis-ci.org/lxyu/pinyin
+
+.. image:: https://pypip.in/d/pinyin/badge.png
+    :target: https://crate.io/packages/pinyin/
 
 Translate chinese chars to pinyin based on Mandarin.dat
 
