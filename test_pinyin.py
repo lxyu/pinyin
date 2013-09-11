@@ -11,7 +11,7 @@ class BasicTestSuite(unittest.TestCase):
 
     def test_get(self):
         self.assertEqual(pinyin.get('你好'), 'nihao')
-        self.assertEqual(pinyin.get(u'你好'), 'nihao')
+        self.assertEqual(pinyin.get(u('你好')), 'nihao')
         self.assertEqual(pinyin.get('你好吗?'), 'nihaoma?')
         self.assertEqual(pinyin.get('你好吗？'), u('nihaoma？'))
 
