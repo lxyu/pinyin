@@ -1,7 +1,7 @@
 import argparse
 from pinyin import get
 
-from pinyin import compat
+from pinyin._compat import u
 
 
 def pinyin():
@@ -13,4 +13,4 @@ def pinyin():
         parser.print_help()
         return
 
-    print(get(compat.u(args.chars)))
+    print(get(u(args.chars)))

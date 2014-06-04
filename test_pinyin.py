@@ -3,7 +3,7 @@
 import unittest
 
 import pinyin
-from pinyin.compat import u
+from pinyin._compat import u
 
 
 class BasicTestSuite(unittest.TestCase):

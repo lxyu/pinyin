@@ -10,6 +10,6 @@ setup(
     package_data={'': ['LICENSE'], 'pinyin': ['Mandarin.dat'], },
     entry_points={"console_scripts": ["pinyin = pinyin.cmd:pinyin", ]},
     url='http://lxyu.github.io/pinyin/',
-    license=open('LICENSE').read(),
+    license="BSD",
     long_description=open('README.rst').read(),
 )

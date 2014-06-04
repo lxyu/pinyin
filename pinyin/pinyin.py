@@ -11,7 +11,7 @@ with open(dat) as f:
         pinyin_dict[k] = v.lower().split(" ")[0][:-1]
 
 
-from . import compat
+from ._compat import u
 
 
 def _pinyin_generator(chars):
@@ -27,8 +27,7 @@ def _pinyin_generator(chars):
 def get(s, delimiter=''):
     """Return pinyin of string, the string must be unicode
     """
-    s = compat.u(s)
-    return delimiter.join(_pinyin_generator(s))
+    return delimiter.join(_pinyin_generator(u(s)))
 
 
 def get_pinyin(s):
@@ -42,5 +41,4 @@ def get_pinyin(s):
 def get_initial(s, delimiter=' '):
     """Return the 1st char of pinyin of string, the string must be unicode
     """
-    s = compat.u(s)
-    return delimiter.join([p[0] for p in _pinyin_generator(s)])
+    return delimiter.join([p[0] for p in _pinyin_generator(u(s))])

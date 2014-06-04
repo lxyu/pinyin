@@ -1,18 +1,14 @@
 Pinyin
 ======
 
-.. image:: https://badge.fury.io/py/pinyin.png
-   :target: http://badge.fury.io/py/pinyin
+.. image:: http://img.shields.io/pypi/v/pinyin.svg?style=flat
+   :target: https://pypi.python.org/pypi/pinyin
 
-.. image:: https://travis-ci.org/lxyu/pinyin.png?branch=master
+.. image:: http://img.shields.io/travis/lxyu/pinyin/master.svg?style=flat
    :target: https://travis-ci.org/lxyu/pinyin
 
-.. image:: https://pypip.in/d/pinyin/badge.png
-   :target: https://crate.io/packages/pinyin/
-
-.. image:: https://d2weczhvl823v0.cloudfront.net/lxyu/pinyin/trend.png
-   :alt: Bitdeli badge
-   :target: https://bitdeli.com/free
+.. image:: http://img.shields.io/pypi/dm/pinyin.svg?style=flat
+   :target: https://pypi.python.org/pypi/pinyin
 
 
 Translate chinese chars to pinyin based on Mandarin.dat
@@ -30,7 +26,7 @@ Usage
 .. code:: python
 
     >>> import pinyin
-    >>> pinyin.get(u'你好')
+    >>> pinyin.get('你好')
     'nihao'
-    >>> pinyin.get_initial(u'你好')
+    >>> pinyin.get_initial('你好')
     'n h'

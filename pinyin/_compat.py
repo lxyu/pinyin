@@ -6,10 +6,9 @@ if py2:
     str_type = unicode
 
     def u(s):
-        if isinstance(s, unicode):
-            return s
-        else:
-            return unicode(s, "utf-8")
+        if not isinstance(s, unicode):
+            s = unicode(s, "utf-8")
+        return s
 
 else:
     str_type = str
