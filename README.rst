@@ -26,7 +26,14 @@ Usage
 .. code:: python
 
     >>> import pinyin
-    >>> pinyin.get('你好')
-    'nihao'
-    >>> pinyin.get_initial('你好')
-    'n h'
+    >>> print pinyin.get('你 好')
+    nǐ hǎo
+
+    >>> print pinyin.get('你好', format="strip", delimiter=" ")
+    ni hao
+
+    >>> print pinyin.get('你好', format="numerical")
+    ni3hao3
+
+    >>> print pinyin.get_initial('你好')
+    n h

@@ -1,33 +1,53 @@
-__all__ = ['get', 'get_pinyin', 'get_initial']
+# -*- coding: utf-8 -*-
 
 import os
+import unicodedata
+from ._compat import u
+
+__all__ = ['get', 'get_pinyin', 'get_initial']
+
+tonemarks = ["", u("̄"), u("́"), u("̌"), u("̀"), ""]
+
 
 # init pinyin dict
 pinyin_dict = {}
+pinyin_tone = {}
 dat = os.path.join(os.path.dirname(__file__), "Mandarin.dat")
 with open(dat) as f:
     for line in f:
         k, v = line.strip().split('\t')
-        pinyin_dict[k] = v.lower().split(" ")[0][:-1]
+        pinyin_dict[k] = u(v.lower().split(" ")[0][:-1])
+        pinyin_tone[k] = int(v.lower().split(" ")[0][-1])
 
 
-from ._compat import u
-
-
-def _pinyin_generator(chars):
+def _pinyin_generator(chars, format):
     """Generate pinyin for chars, if char is not chinese character,
     itself will be returned.
     Chars must be unicode list.
     """
     for char in chars:
         key = "%X" % ord(char)
-        yield pinyin_dict.get(key, char)
+        pinyin = pinyin_dict.get(key, char)
+        tone = pinyin_tone.get(key, 0)
+        if tone == 0:
+            pass
+        elif format == "numerical":
+            pinyin = pinyin + str(tone)
+        elif format == "diacritical":
+            # Find first vowel -- we should put the diacritical mark
+            # just after
+            vowel = pinyin.index(next(x for x in pinyin if x in "aeiou")) + 1
+            pinyin = pinyin[:vowel] + tonemarks[tone] + pinyin[vowel:]
+        elif format != "strip":
+            error = "Format must be one of: numerical/diacritical/strip"
+            raise ValueError(error)
+        yield unicodedata.normalize('NFC', pinyin)
 
 
-def get(s, delimiter=''):
+def get(s, delimiter='', format="diacritical"):
     """Return pinyin of string, the string must be unicode
     """
-    return delimiter.join(_pinyin_generator(u(s)))
+    return delimiter.join(_pinyin_generator(u(s), format=format))
 
 
 def get_pinyin(s):
@@ -41,4 +61,5 @@ def get_pinyin(s):
 def get_initial(s, delimiter=' '):
     """Return the 1st char of pinyin of string, the string must be unicode
     """
-    return delimiter.join([p[0] for p in _pinyin_generator(u(s))])
+    initials = (p[0] for p in _pinyin_generator(u(s), format="strip"))
+    return delimiter.join(initials)
