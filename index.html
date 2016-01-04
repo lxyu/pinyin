@@ -4,54 +4,71 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Pinyin by lxyu</title>
-
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
   </head>
   <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/lxyu/pinyin">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/lxyu/pinyin/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/lxyu/pinyin/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
     <div class="wrapper">
-      <header>
-        <h1>Pinyin</h1>
-        <p>A simple python script to translate chinese to pinyin based on Mandarin.dat</p>
 
-        <p class="view"><a href="https://github.com/lxyu/pinyin">View the Project on GitHub <small>lxyu/pinyin</small></a></p>
-
-
-        <ul>
-          <li><a href="https://github.com/lxyu/pinyin/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/lxyu/pinyin/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/lxyu/pinyin">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
       <section>
-        <h1>Pinyin</h1>
+        <div id="title">
+          <h1>Pinyin</h1>
+          <p>A simple python script to translate chinese to pinyin based on Mandarin.dat</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/lxyu">lxyu</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="pinyin" class="anchor" href="#pinyin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pinyin</h1>
 
 <p>Translate chinese chars to pinyin based on Mandarin.dat</p>
 
-<h2>Install</h2>
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
 
-<div class="highlight"><pre><span class="nv">$ </span>pip install pinyin
-</pre></div>
+<div class="highlight highlight-source-shell"><pre>$ pip install pinyin</pre></div>
 
-<h2>Usage</h2>
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<div class="highlight"><pre><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">pinyin</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">pinyin</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">u'你好'</span><span class="p">)</span>
-<span class="s">'nihao'</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">pinyin</span><span class="o">.</span><span class="n">get_initial</span><span class="p">(</span><span class="s">u'你好'</span><span class="p">)</span>
-<span class="s">'n h'</span>
-</pre></div>
+<div class="highlight highlight-source-python"><pre><span class="pl-k">&gt;&gt;&gt;</span> <span class="pl-k">import</span> pinyin
+<span class="pl-k">&gt;&gt;&gt;</span> <span class="pl-k">print</span> pinyin.get(<span class="pl-s"><span class="pl-pds">'</span>你 好<span class="pl-pds">'</span></span>)
+nǐ hǎo
+
+<span class="pl-k">&gt;&gt;&gt;</span> <span class="pl-k">print</span> pinyin.get(<span class="pl-s"><span class="pl-pds">'</span>你好<span class="pl-pds">'</span></span>, <span class="pl-smi">format</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>strip<span class="pl-pds">"</span></span>, <span class="pl-smi">delimiter</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span> <span class="pl-pds">"</span></span>)
+ni hao
+
+<span class="pl-k">&gt;&gt;&gt;</span> <span class="pl-k">print</span> pinyin.get(<span class="pl-s"><span class="pl-pds">'</span>你好<span class="pl-pds">'</span></span>, <span class="pl-smi">format</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>numerical<span class="pl-pds">"</span></span>)
+ni3hao3
+
+<span class="pl-k">&gt;&gt;&gt;</span> <span class="pl-k">print</span> pinyin.get_initial(<span class="pl-s"><span class="pl-pds">'</span>你好<span class="pl-pds">'</span></span>)
+n h</pre></div>
+
+<p><em>format must be one of: numerical/diacritical/strip</em></p>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/lxyu">lxyu</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
+
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
               <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
