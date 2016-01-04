@@ -37,3 +37,7 @@ Usage
 
     >>> print pinyin.get_initial('你好')
     n h
+
+.. note::
+
+    `format` must be one of: numerical/diacritical/strip
