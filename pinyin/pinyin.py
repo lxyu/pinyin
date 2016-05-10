@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
+import itertools
 import unicodedata
+
 from ._compat import u
 
 __all__ = ['get', 'get_pinyin', 'get_initial']
-
-tonemarks = ["", u("̄"), u("́"), u("̌"), u("̀"), ""]
 
 
 # init pinyin dict
@@ -35,9 +35,10 @@ def _pinyin_generator(chars, format):
         elif format == "numerical":
             pinyin += str(tone)
         elif format == "diacritical":
-            # Find first vowel -- we should put the diacritical mark
-            # just after
-            vowel = pinyin.index(next(x for x in pinyin if x in "aeiou")) + 1
+            # Find first vowel -- where we should put the diacritical mark
+            vowels = itertools.chain((c for c in pinyin if c in "aeo"),
+                                     (c for c in pinyin if c in "iu"))
+            vowel = pinyin.index(next(vowels)) + 1
             pinyin = pinyin[:vowel] + tonemarks[tone] + pinyin[vowel:]
         else:
             error = "Format must be one of: numerical/diacritical/strip"
@@ -65,3 +66,5 @@ def get_initial(s, delimiter=' '):
     """
     initials = (p[0] for p in _pinyin_generator(u(s), format="strip"))
     return delimiter.join(initials)
+
+tonemarks = ["", u("̄"), u("́"), u("̌"), u("̀"), ""]

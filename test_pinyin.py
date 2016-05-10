@@ -41,6 +41,12 @@ class BasicTestSuite(unittest.TestCase):
     def test_mixed_chinese_english_input(self):
         self.assertEqual(pinyin.get('hi你好'), u('hinǐhǎo'))
 
+    def test_correct_diacritical(self):
+        self.assertEqual(pinyin.get("操"), u("cāo"))
+        self.assertEqual(pinyin.get("小"), u("xiǎo"))
+        self.assertEqual(pinyin.get("绝"), u("jué"))
+        self.assertEqual(pinyin.get("被"), u("bèi"))
+
 
 if __name__ == '__main__':
     unittest.main()
