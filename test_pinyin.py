@@ -20,6 +20,7 @@ class BasicTestSuite(unittest.TestCase):
 
         self.assertEqual(pinyin.get('你好'), u('nǐhǎo'))
         self.assertEqual(pinyin.get('叶'), u('yè'))
+        self.assertEqual(pinyin.get('少女'), u('shǎonv̌'))
 
     def test_get_with_delimiter(self):
         self.assertEqual(pinyin.get('你好', " "), u('nǐ hǎo'))
@@ -46,6 +47,7 @@ class BasicTestSuite(unittest.TestCase):
         self.assertEqual(pinyin.get("小"), u("xiǎo"))
         self.assertEqual(pinyin.get("绝"), u("jué"))
         self.assertEqual(pinyin.get("被"), u("bèi"))
+        self.assertEqual(pinyin.get("略"), u("lvè"))
 
 
 if __name__ == '__main__':
