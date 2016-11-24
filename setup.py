@@ -7,7 +7,7 @@ from setuptools import setup
 
 setup(
     name='pinyin',
-    version='0.3.1',
+    version='0.4.0',
     description='Translate chinese chars to pinyin based on Mandarin.dat',
     author='Lx Yu',
     author_email='github@lxyu.net',

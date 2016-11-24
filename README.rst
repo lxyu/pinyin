@@ -7,9 +7,6 @@ Pinyin
 .. image:: http://img.shields.io/travis/lxyu/pinyin/master.svg?style=flat
    :target: https://travis-ci.org/lxyu/pinyin
 
-.. image:: http://img.shields.io/pypi/dm/pinyin.svg?style=flat
-   :target: https://pypi.python.org/pypi/pinyin
-
 
 Translate chinese chars to pinyin based on Mandarin.dat
 
@@ -60,8 +57,8 @@ Note that this is a prototype, and only functions from Python 3.
 License
 -------
 
-pinyin is free software, under an MIT-style license. See LICENSE for
-details. The data file for translations is the CC-BY-SA 3.0. The
-translations are from the CC-CE-DICT project
-(https://cc-cedict.org/wiki/), by Denisowski, Peterson, Brelsford, and
-others.
+`pinyin` is free software, under an MIT-style license. See LICENSE for details.
+
+The data file for translations is the CC-BY-SA 3.0.
+
+The translations are from the CC-CE-DICT project (https://cc-cedict.org/wiki/), by Denisowski, Peterson, Brelsford, and others.
