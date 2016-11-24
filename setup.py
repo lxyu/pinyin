@@ -10,7 +10,9 @@ setup(
     author='Lx Yu',
     author_email='github@lxyu.net',
     packages=['pinyin', ],
-    package_data={'': ['LICENSE'], 'pinyin': ['Mandarin.dat'], },
+    package_data={
+        '': ['LICENSE'],
+        'pinyin': ['Mandarin.dat', 'cedict.txt.gz'], },
     entry_points={"console_scripts": ["pinyin = pinyin.cmd:pinyin", ]},
     url='http://lxyu.github.io/pinyin/',
     license="BSD",
