@@ -39,6 +39,7 @@ def _pinyin_generator(chars, format):
             vowels = itertools.chain((c for c in pinyin if c in "aeo"),
                                      (c for c in pinyin if c in "iuv"))
             vowel = pinyin.index(next(vowels)) + 1
+            pinyin = pinyin.replace('v', u('ü'))
             pinyin = pinyin[:vowel] + tonemarks[tone] + pinyin[vowel:]
         else:
             error = "Format must be one of: numerical/diacritical/strip"
