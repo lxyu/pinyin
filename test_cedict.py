@@ -7,6 +7,13 @@ import pinyin.cedict
 
 class BasicTestSuite(unittest.TestCase):
     """Basic test cases."""
+
+    def test_pronounce_word(self):
+        self.assertEqual(
+            pinyin.cedict.pronounce_word("还是"),
+            "hai2 shi5"
+        )
+
     def test_translate_word(self):
         self.assertEqual(
             list(pinyin.cedict.translate_word("你好")),
@@ -41,6 +48,19 @@ class BasicTestSuite(unittest.TestCase):
                  'shrewd', 'alert', 'perverse', 'contrary to reason',
                  'irregular', 'abnormal']]]
         )
+        self.assertEqual(
+            list(pinyin.cedict.all_phrase_translations(
+                "刻是梦还是真", include_pinyin=True)),
+            [['刻', 'kè', ['quarter (hour)', 'moment', 'to carve', 'to engrave', 'to cut',
+                          'oppressive', 'classifier for short time intervals']],
+             ['是', 'shì', ['variant of 是[shi4]', '(used in given names)']],
+             ['梦', 'mèng', ['dream', 'CL:場|场[chang2],個|个[ge4]']],
+             ['还', 'huán', ['to pay back', 'to return']],
+             ['还是', 'hái shi', ['or', 'still', 'nevertheless', 'had better']],
+             ['是', 'shì', ['variant of 是[shi4]', '(used in given names)']],
+             ['真', 'zhēn', ['really', 'truly', 'indeed', 'real', 'true', 'genuine']]]
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
