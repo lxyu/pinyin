@@ -21,8 +21,8 @@ import gzip
 import os.path
 import re
 import string
-
 import collections
+from pinyin import numerical_to_diacritical
 
 
 def Tree():
@@ -62,7 +62,8 @@ def init():
 
     dictionaries = {
         'traditional': {},
-        'simplified': {}
+        'simplified': {},
+        'pinyin': {}
     }
 
     trees = {
@@ -82,10 +83,16 @@ def init():
 
     for traditional, simplified, pinyin, meaning in parsed_lines:
         meaning = meaning.split('/')
+        meaning = (pinyin, meaning)
         dictionaries['traditional'][traditional] = meaning
         dictionaries['simplified'][simplified] = meaning
+        dictionaries['pinyin'][simplified] = pinyin
         _add_to_tree(trees['traditional'], traditional, meaning)
         _add_to_tree(trees['simplified'], simplified, meaning)
+
+
+def pronounce_word(word):
+    return dictionaries['pinyin'].get(word)
 
 
 def translate_word(word, dictionary=['simplified']):
@@ -97,11 +104,11 @@ def translate_word(word, dictionary=['simplified']):
         init()
     for d in dictionary:
         if word in dictionaries[d]:
-            return dictionaries[d][word]
+            return dictionaries[d][word][1]
     return None
 
 
-def _words_at_the_beginning(word, tree, prefix=""):
+def _words_at_the_beginning(word, tree, prefix="", include_pinyin=False):
     '''
     We return all portions of the tree corresponding to the beginning
     of `word`. This is used recursively, so we pass the prefix so we
@@ -109,17 +116,21 @@ def _words_at_the_beginning(word, tree, prefix=""):
     '''
     l = []
     if "" in tree:
-        l.append([prefix, tree[""]])
+        pinyin, meaning = tree[""]
+        l.append([prefix, pinyin, meaning])
     if len(word) > 0 and word[0] in tree:
-        l.extend(_words_at_the_beginning(
-            word[1:],
-            tree[word[0]],
-            prefix=prefix+word[0]
-        ))
+        l.extend(
+            _words_at_the_beginning(
+                word[1:],
+                tree[word[0]],
+                prefix=prefix + word[0],
+                include_pinyin=include_pinyin,
+            )
+        )
     return l
 
 
-def all_phrase_translations(phrase):
+def all_phrase_translations(phrase, dictionary='simplified', include_pinyin=False, format='diacritical'):
     '''
     Return the set of translations for all possible words in a full
     phrase. Chinese is sometimes ambiguous. We do not attempt to
@@ -132,7 +143,15 @@ def all_phrase_translations(phrase):
     for word in phrase:
         for x in range(len(word)):
             for translation in _words_at_the_beginning(
-                    word[x+1:],
-                    trees['simplified'][word[x]],
-                    prefix=word[x]):
-                yield translation
+                word[x + 1:],
+                trees[dictionary][word[x]],
+                prefix=word[x],
+                include_pinyin=include_pinyin,
+            ):
+                characters, pinyin, meaning = translation
+                if include_pinyin:
+                    if format == 'diacritical':
+                        pinyin = numerical_to_diacritical(pinyin)
+                    yield [characters, pinyin, meaning]
+                else:
+                    yield [characters, meaning]

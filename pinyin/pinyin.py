@@ -6,7 +6,7 @@ import unicodedata
 
 from ._compat import u
 
-__all__ = ['get', 'get_pinyin', 'get_initial']
+__all__ = ['get', 'get_pinyin', 'get_initial', 'numerical_to_diacritical']
 
 
 # init pinyin dict
@@ -66,5 +66,25 @@ def get_initial(s, delimiter=' '):
     """
     initials = (p[0] for p in _pinyin_generator(u(s), format="strip"))
     return delimiter.join(initials)
+
+
+def numerical_to_diacritical(pinyin):
+    """
+    Example:
+     hai2 shi -> hái shi
+    """
+    phonemes = pinyin.split()
+    result = []
+    for p in phonemes:
+        pinyin, tone = p[:-1], int(p[-1])
+
+        # Find first vowel -- where we should put the diacritical mark
+        vowels = itertools.chain((c for c in pinyin if c in "aeo"),
+                                 (c for c in pinyin if c in "iuv"))
+        vowel = pinyin.index(next(vowels)) + 1
+        pinyin = pinyin[:vowel] + tonemarks[tone] + pinyin[vowel:]
+        result.append(unicodedata.normalize('NFC', pinyin))
+    return ' '.join(result)
+
 
 tonemarks = ["", u("̄"), u("́"), u("̌"), u("̀"), ""]
