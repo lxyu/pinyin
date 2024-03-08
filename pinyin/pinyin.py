@@ -37,7 +37,8 @@ def _pinyin_generator(chars, format):
         elif format == "diacritical":
             # Find first vowel -- where we should put the diacritical mark
             vowels = itertools.chain((c for c in pinyin if c in "aeo"),
-                                     (c for c in pinyin if c in "iuv"))
+                                     (c for c in pinyin if c in "uv"),
+                                     (c for c in pinyin if c in "i"))
             vowel = pinyin.index(next(vowels)) + 1
             pinyin = pinyin[:vowel] + tonemarks[tone] + pinyin[vowel:]
         else:
